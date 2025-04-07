@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
+import nextra from 'nextra'
 
-const nextConfig: NextConfig = {
+const githubPagesConfig:NextConfig = {
   /**
    * Enable static exports.
    *
@@ -13,7 +14,7 @@ const nextConfig: NextConfig = {
    *
    * @see https://nextjs.org/docs/app/api-reference/next-config-js/basePath
    */
-  basePath: "/nextjs-github-pages",
+  basePath: "",
 
   /**
    * Disable server-based image optimization. Next.js does not support
@@ -24,6 +25,22 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  
 };
 
-export default nextConfig;
+const withNextra = nextra({
+  defaultShowCopyCode: true,
+  readingTime: true
+})
+
+let nextraConfig = withNextra({
+  reactStrictMode: true,
+  cleanDistDir: true
+})
+
+const nextConfig: NextConfig = {
+  ...githubPagesConfig,
+  ...nextraConfig,
+}
+
+export default nextConfig
